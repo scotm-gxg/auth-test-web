@@ -4,5 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    tenant: 'gxgauthtest.onmicrosoft.com',
+    clientID: '76eab466-4dfe-4766-a1b3-0085145d8fbc',
+    signUpSignInPolicy: 'B2C_1_sign-in',
+    b2cScopes: ['https://gxgauthtest.onmicrosoft.com/TestWebApi/core.api'],
+    webApi: 'http://localhost:5001'
 };

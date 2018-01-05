@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Token } from './Models/Token';
+import { AuthenticationService } from "./authentication.service";
 
 @Component({
     selector: 'app-root',
@@ -14,22 +15,17 @@ export class AppComponent {
     messages: string[] = [];
     token: Token;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private auth: AuthenticationService) {
     }
 
     attemptLogin() {
-        const login = {
-            userName: this.userName,
-            password: this.pwd
-        };
-
-        this.http.post<Token>('/api/login', login)
-            .subscribe(
-                (resp) => {
-                        this.messages.push("Authentication Success");
-                        this.token = resp;
-                    },
-                (err) => this.messages.push("Authentication Failure")
-            );
+        this.auth.login()
+            .then(tokenString => {
+                this.token = {
+                    access_token: tokenString,
+                    token_type: "Bearer",
+                    expires_in: null
+                }
+            });
     }
 }
