@@ -17,13 +17,23 @@
         <button type="button" (click)="attemptLogin()">Log In</button>
     </div>
 
+    <div *ngIf="token?.access_token">
+        <p style="color: darkgreen">Logged in</p>
+    </div>
+    <div *ngIf="!token?.access_token">
+        <p style="color: darkred">NOT logged in</p>
+    </div>
+
 </form>
 
 <div>
-    <h3>Token</h3>
-    <div>
-        {{token?.access_token}}
-    </div>
+    <button type="button" style="" (click)="getValues()">Get Values</button>
+    <h3>Orders</h3>
+    <ul>
+        <li *ngFor="let order of orders | async">
+            {{order.orderId}} - {{order.orderDescription}}
+        </li>
+    </ul>
     <h3>Messages</h3>
     <div *ngFor="let msg of messages">
         {{msg}}

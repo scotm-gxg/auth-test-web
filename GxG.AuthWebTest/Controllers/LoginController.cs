@@ -1,3 +1,4 @@
+/*
 using System.Threading.Tasks;
 using GxG.AuthWebTest.Models;
 using IdentityModel.Client;
@@ -29,3 +30,4 @@ namespace GxG.AuthWebTest.Controllers
         }
     }
 }
+*/

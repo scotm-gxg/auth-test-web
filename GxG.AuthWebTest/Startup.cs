@@ -43,12 +43,17 @@ namespace GxG.AuthWebTest
             services.AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
                 .AddJwtBearer(jwtOptions =>
                 {
-                    //jwtOptions
+                    jwtOptions.Authority = $"https://login.microsoftonline.com/tfp/{Configuration["AzureAdB2C:Tenant"]}/{Configuration["AzureAdB2C:Policy"]}/v2.0/";
+                    jwtOptions.Audience = Configuration["AzureAdB2C:ClientId"];
                 });
 
             services.AddMvc(opts =>
             {
-                var policy = ScopePolicy.Create("core.api");
+                /*var policy = ScopePolicy.Create("core.api");
+                opts.Filters.Add(new AuthorizeFilter(policy));*/
+
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
                 opts.Filters.Add(new AuthorizeFilter(policy));
             });
 
