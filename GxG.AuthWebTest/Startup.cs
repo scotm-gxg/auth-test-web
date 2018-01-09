@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace GxG.AuthWebTest
 {
@@ -34,26 +35,25 @@ namespace GxG.AuthWebTest
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(options => { options.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme; })
-                .AddIdentityServerAuthentication(jwtOptions =>
+
+            services.AddMvcCore()
+                .AddMvcOptions(opts =>
                 {
-                    //jwtOptions.Authority = "http://authtest";
-                    jwtOptions.Authority = "http://localhost:5000";
-                    //jwtOptions.ApiName = "core.api";
-                   // jwtOptions.Audience = "http://localhost:5001";
-                    jwtOptions.RequireHttpsMetadata = false;
+                    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                    opts.Filters.Add(new AuthorizeFilter(policy));
+                })
+                .AddAuthorization()
+                .AddJsonFormatters();
+
+
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(opts =>
+                {
+                    opts.Authority = "http://localhost:5000";
+                    opts.RequireHttpsMetadata = false;
+
+                    opts.ApiName = "core.api";
                 });
-
-            services.AddMvc(opts =>
-            {
-                /*var policy = ScopePolicy.Create("core.api");
-                opts.Filters.Add(new AuthorizeFilter(policy));*/
-
-                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-
-                opts.Filters.Add(new AuthorizeFilter(policy));
-            });
-
 
         }
 
@@ -65,7 +65,7 @@ namespace GxG.AuthWebTest
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Use(async (context, next) =>
+            /*app.Use(async (context, next) =>
             {
                 await next();
                 if (context.Response.StatusCode == 404 &&
@@ -75,7 +75,7 @@ namespace GxG.AuthWebTest
                     context.Request.Path = "/index.html";
                     await next();
                 }
-            });
+            });*/
 
             app.UseAuthentication();
 
