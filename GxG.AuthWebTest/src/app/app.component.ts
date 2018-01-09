@@ -22,7 +22,7 @@ export class AppComponent {
     }
 
     attemptLogin() {
-        this.auth.login()
+        this.auth.login(this.userName, this.pwd)
             .then(tokenString => {
                 this.token = {
                     access_token: tokenString,
@@ -46,7 +46,7 @@ export class AppComponent {
                     return [];
                 }
 
-                this.messages.push("Getting orders failed: " + reason);
+                this.messages.push("Getting orders failed: " + JSON.stringify(reason));
                 return [];
             });
     }

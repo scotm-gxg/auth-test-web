@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,11 +34,14 @@ namespace GxG.AuthWebTest
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
-                .AddJwtBearer(jwtOptions =>
+            services.AddAuthentication(options => { options.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme; })
+                .AddIdentityServerAuthentication(jwtOptions =>
                 {
-                    jwtOptions.Authority = $"https://login.microsoftonline.com/tfp/{Configuration["AzureAdB2C:Tenant"]}/{Configuration["AzureAdB2C:Policy"]}/v2.0/";
-                    jwtOptions.Audience = Configuration["AzureAdB2C:ClientId"];
+                    //jwtOptions.Authority = "http://authtest";
+                    jwtOptions.Authority = "http://localhost:5000";
+                    //jwtOptions.ApiName = "core.api";
+                   // jwtOptions.Audience = "http://localhost:5001";
+                    jwtOptions.RequireHttpsMetadata = false;
                 });
 
             services.AddMvc(opts =>

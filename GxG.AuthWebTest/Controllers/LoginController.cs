@@ -1,4 +1,3 @@
-/*
 using System.Threading.Tasks;
 using GxG.AuthWebTest.Models;
 using IdentityModel.Client;
@@ -16,6 +15,8 @@ namespace GxG.AuthWebTest.Controllers
         public async Task<IActionResult> LogIn([FromBody] AuthenticateModel authModel)
         {
             var discoveryClient = new DiscoveryClient("http://localhost:5000");
+            /*var discoveryClient = new DiscoveryClient("http://authtest");
+            discoveryClient.Policy.RequireHttps = false;*/
             var doc = await discoveryClient.GetAsync();
 
             var tokenClient = new TokenClient(doc.TokenEndpoint, "ro.client", "my-shared-secret");
@@ -30,4 +31,4 @@ namespace GxG.AuthWebTest.Controllers
         }
     }
 }
-*/
+
