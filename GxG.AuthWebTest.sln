@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GxG.AuthWebTest", "GxG.AuthWebTest\GxG.AuthWebTest.csproj", "{D6580769-4643-47C8-A1A5-84D5F3B8B7C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GxG.AuthWebTest", "GxG.AuthWebTest\GxG.AuthWebTest.csproj", "{D6580769-4643-47C8-A1A5-84D5F3B8B7C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GxG.AuthWebTest.MVC", "GxG.AuthWebTest.MVC\GxG.AuthWebTest.MVC.csproj", "{EDF95043-E815-48CA-AAC9-0047819D37FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D6580769-4643-47C8-A1A5-84D5F3B8B7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6580769-4643-47C8-A1A5-84D5F3B8B7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6580769-4643-47C8-A1A5-84D5F3B8B7C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF95043-E815-48CA-AAC9-0047819D37FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF95043-E815-48CA-AAC9-0047819D37FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF95043-E815-48CA-AAC9-0047819D37FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF95043-E815-48CA-AAC9-0047819D37FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

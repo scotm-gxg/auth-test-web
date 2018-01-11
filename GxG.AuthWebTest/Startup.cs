@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -65,7 +65,7 @@ namespace GxG.AuthWebTest
                 app.UseDeveloperExceptionPage();
             }
 
-            /*app.Use(async (context, next) =>
+            app.Use(async (context, next) =>
             {
                 await next();
                 if (context.Response.StatusCode == 404 &&
@@ -75,7 +75,7 @@ namespace GxG.AuthWebTest
                     context.Request.Path = "/index.html";
                     await next();
                 }
-            });*/
+            });
 
             app.UseAuthentication();
 
