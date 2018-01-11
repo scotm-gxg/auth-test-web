@@ -11,6 +11,7 @@
 **/bin
 **/obj
 .vs/
+!GxG.AuthWebTest.MVC/wwwroot
 
 # IDEs and editors
 /.idea
