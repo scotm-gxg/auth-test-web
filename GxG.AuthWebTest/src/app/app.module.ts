@@ -6,15 +6,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {AuthenticationService} from "./authentication.service";
 import {ValuesService} from "./values.service";
+import { HomeComponent } from './home/home.component';
+import {AppRoutes} from "./app.routes";
+import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AuthCallbackComponent
   ],
   imports: [
       BrowserModule,
       FormsModule,
-      HttpClientModule
+      HttpClientModule,
+      AppRoutes
   ],
   providers: [AuthenticationService, ValuesService],
   bootstrap: [AppComponent]

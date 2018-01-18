@@ -5,6 +5,8 @@ import { AuthenticationService } from "./authentication.service";
 import {ValuesService} from "./values.service";
 import {Order} from './Models/Order';
 
+import { User } from "oidc-client";
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -12,42 +14,10 @@ import {Order} from './Models/Order';
 })
 export class AppComponent {
     title = 'app';
-    userName: string;
-    pwd: string;
-    messages: string[] = [];
-    token: Token;
-    orders: Promise<Order[]>;
 
-    constructor(private http: HttpClient, private auth: AuthenticationService, private valuesService: ValuesService) {
+
+    constructor() {
     }
 
-    attemptLogin() {
-        this.auth.login(this.userName, this.pwd)
-            .then(tokenString => {
-                this.token = {
-                    access_token: tokenString,
-                    token_type: "Bearer",
-                    expires_in: null
-                }
-            });
-    }
 
-    getValues() {
-        let myToken = this.token ? this.token.access_token : null;
-
-        this.orders = this.valuesService.getValues(myToken)
-            .then(orders => {
-                this.messages = [];
-                return orders;
-            })
-            .catch(reason => {
-                if (reason && reason.status && reason.status === 401) {
-                    this.messages.push("Unauthorized");
-                    return [];
-                }
-
-                this.messages.push("Getting orders failed: " + JSON.stringify(reason));
-                return [];
-            });
-    }
 }
